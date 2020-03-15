@@ -23,8 +23,8 @@ class Common(Configuration):
         'django_filters',            # for filtering rest endpoints
 
         # Your apps
-        'indicators-api.users',
-
+        'indicators-api.indicator_data',
+        
     )
 
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
