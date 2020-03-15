@@ -22,7 +22,7 @@ class Common(Configuration):
         'django_filters',            # for filtering rest endpoints
 
         # Your apps
-        'indicators-api.indicator_data',
+        'indicators_api.indicator_data',
         
     )
 
@@ -38,9 +38,9 @@ class Common(Configuration):
     )
 
     ALLOWED_HOSTS = ["*"]
-    ROOT_URLCONF = 'indicators-api.urls'
+    ROOT_URLCONF = 'indicators_api.urls'
     SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
-    WSGI_APPLICATION = 'indicators-api.wsgi.application'
+    WSGI_APPLICATION = 'indicators_api.wsgi.application'
 
     # Email
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

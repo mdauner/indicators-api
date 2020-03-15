@@ -1,9 +1,8 @@
 # Core
 pytz==2019.3
-Django==3.0.2
+Django==3.0.4
 django-configurations==2.2
 gunicorn==20.0.4
-newrelic==5.4.1.134
 requests==2.23.0
 
 # For the persistence stores
@@ -12,7 +11,6 @@ dj-database-url==0.5.0
 
 # Model Tools
 django-model-utils==4.0.0
-django_unique_upload==0.2.1
 
 # Rest apis
 djangorestframework==3.11.0
@@ -27,11 +25,9 @@ flake8==3.7.9
 black==19.10b0
 
 # Testing
-mock==3.0.5
 factory-boy==2.12.0
-django-nose==1.4.6
-nose-progressive==1.5.2
-coverage==5.0.3
+pytest==5.4.1
+pytest-django==3.8.0
 
 # Static and Media Storage
 django-storages==1.8.0

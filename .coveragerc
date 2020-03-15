@@ -5,6 +5,6 @@ omit = *migrations*,
        *test*,
        *admin*,
        ./manage.py,
-       ./indicators-api/config/*,
-       ./indicators-api/wsgi.py,
+       ./indicators_api/config/*,
+       ./indicators_api/wsgi.py,
        *__init__*

@@ -1,9 +1,9 @@
-# indicators-api
+# indicators_api
 
-[![Build Status](https://travis-ci.org/mdauner/indicators-api.svg?branch=master)](https://travis-ci.org/mdauner/indicators-api)
+[![Build Status](https://travis-ci.org/mdauner/indicators_api.svg?branch=master)](https://travis-ci.org/mdauner/indicators_api)
 [![Built with](https://img.shields.io/badge/Built_with-Cookiecutter_Django_Rest-F7B633.svg)](https://github.com/agconti/cookiecutter-django-rest)
 
-Its all about a Weissman score > 5.0. Check out the project's [documentation](http://mdauner.github.io/indicators-api/).
+Its all about a Weissman score > 5.0. Check out the project's [documentation](http://mdauner.github.io/indicators_api/).
 
 # Prerequisites
 
@@ -33,26 +33,26 @@ Deployment automated via Travis. When builds pass on the master or qa branch, Tr
 Creating the production sever:
 
 ```
-heroku create indicators-api-prod --remote prod && \
-    heroku addons:create newrelic:wayne --app indicators-api-prod && \
-    heroku addons:create heroku-postgresql:hobby-dev --app indicators-api-prod && \
+heroku create indicators_api-prod --remote prod && \
+    heroku addons:create newrelic:wayne --app indicators_api-prod && \
+    heroku addons:create heroku-postgresql:hobby-dev --app indicators_api-prod && \
     heroku config:set DJANGO_SECRET=`openssl rand -base64 32` \
         DJANGO_AWS_ACCESS_KEY_ID="Add your id" \
         DJANGO_AWS_SECRET_ACCESS_KEY="Add your key" \
-        DJANGO_AWS_STORAGE_BUCKET_NAME="indicators-api-prod" \
-        --app indicators-api-prod
+        DJANGO_AWS_STORAGE_BUCKET_NAME="indicators_api-prod" \
+        --app indicators_api-prod
 ```
 
 Creating the qa sever:
 
 ```
-heroku create `indicators-api-qa --remote qa && \
+heroku create `indicators_api-qa --remote qa && \
     heroku addons:create newrelic:wayne && \
     heroku addons:create heroku-postgresql:hobby-dev && \
     heroku config:set DJANGO_SECRET=`openssl rand -base64 32` \
         DJANGO_AWS_ACCESS_KEY_ID="Add your id" \
         DJANGO_AWS_SECRET_ACCESS_KEY="Add your key" \
-        DJANGO_AWS_STORAGE_BUCKET_NAME="indicators-api-qa" \
+        DJANGO_AWS_STORAGE_BUCKET_NAME="indicators_api-qa" \
 ```
 
 Securely add your heroku credentials to travis so it can automatically deploy your changes.

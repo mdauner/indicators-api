@@ -5,7 +5,7 @@ import sys
 
 
 def main():
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "indicators-api.config")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "indicators_api.config")
     os.environ.setdefault("DJANGO_CONFIGURATION", "Local")
 
     try:
