@@ -6,7 +6,10 @@ from .serializers import DataSetSerializer
 
 
 class DataSetViewSet(
-    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
+    mixins.UpdateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
 ):
     queryset = DataSet.objects.all()
     serializer_class = DataSetSerializer
