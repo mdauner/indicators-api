@@ -50,3 +50,86 @@ def test_returns_all_dataset_fields(api_client):
     assert response.status_code == 200
     assert list(response.data.keys()) == ["id", "country", "indicator", "data"]
 
+
+@pytest.mark.django_db
+def test_creates_new_dataset_value(api_client):
+    dataset = DataSetFactory()
+    year = "2020"
+    value = "123.5"
+
+    assert year not in dataset.data
+
+    url = reverse("dataset-detail", kwargs={"pk": dataset.id})
+    response = api_client.patch(url, data={"year": year, "value": value})
+
+    dataset.refresh_from_db()
+
+    assert dataset.data[year] == value
+    assert response.status_code == 200
+    assert response.data["id"] == dataset.id
+
+
+@pytest.mark.django_db
+def test_updates_existing_dataset_value(api_client):
+    dataset = DataSetFactory()
+    year = list(dataset.data.keys())[0]
+    value = "123.5"
+
+    url = reverse("dataset-detail", kwargs={"pk": dataset.id})
+    response = api_client.patch(url, data={"year": year, "value": value})
+
+    dataset.refresh_from_db()
+
+    assert dataset.data[year] == value
+    assert response.status_code == 200
+    assert response.data["id"] == dataset.id
+
+
+@pytest.mark.django_db
+def test_throws_error_when_no_year_is_passed(api_client):
+    dataset = DataSetFactory()
+    value = "123.5"
+
+    url = reverse("dataset-detail", kwargs={"pk": dataset.id})
+    response = api_client.patch(url, data={"value": value})
+
+    assert response.status_code == 400
+    assert response.data["year"] == "This field is required."
+
+
+@pytest.mark.django_db
+def test_throws_error_when_no_value_is_passed(api_client):
+    dataset = DataSetFactory()
+    year = list(dataset.data.keys())[0]
+
+    url = reverse("dataset-detail", kwargs={"pk": dataset.id})
+    response = api_client.patch(url, data={"year": year})
+
+    assert response.status_code == 400
+    assert response.data["value"] == "This field is required."
+
+
+@pytest.mark.django_db
+def test_throws_error_when_year_is_not_valid(api_client):
+    dataset = DataSetFactory()
+    year = "abc"
+    value = "123.5"
+
+    url = reverse("dataset-detail", kwargs={"pk": dataset.id})
+    response = api_client.patch(url, data={"year": year, "value": value})
+
+    assert response.status_code == 400
+    assert response.data["year"][0] == "A valid year is required."
+
+
+@pytest.mark.django_db
+def test_throws_error_when_value_is_not_a_number(api_client):
+    dataset = DataSetFactory()
+    year = list(dataset.data.keys())[0]
+    value = "abc"
+
+    url = reverse("dataset-detail", kwargs={"pk": dataset.id})
+    response = api_client.patch(url, data={"year": year, "value": value})
+
+    assert response.status_code == 400
+    assert response.data["value"][0] == "A valid number is required."
