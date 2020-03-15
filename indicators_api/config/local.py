@@ -8,4 +8,3 @@ class Local(Common):
 
     # Testing
     INSTALLED_APPS = Common.INSTALLED_APPS
-

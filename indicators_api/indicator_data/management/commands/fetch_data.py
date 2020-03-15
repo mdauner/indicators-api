@@ -32,6 +32,8 @@ class Command(BaseCommand):
                     data={point["date"]: point["value"] for point in data},
                 )
 
+        num_indicators = len(DataSet.Indicator.choices)
+        num_countries = len(DataSet.Country.choices)
         logger.info(
-            f"Fetched data for {len(DataSet.Indicator.choices)} indicators in {len(DataSet.Country.choices)} countries"
+            f"Fetched data for {num_indicators} indicators in {num_countries} countries"
         )

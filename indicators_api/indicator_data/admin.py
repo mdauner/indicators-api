@@ -4,13 +4,14 @@ from django_admin_hstore_widget.forms import HStoreFormField
 
 from .models import DataSet
 
+
 class DataSetAdminForm(forms.ModelForm):
     data = HStoreFormField()
-    
+
     class Meta:
-       model = DataSet
-       exclude = ()
-    
+        model = DataSet
+        exclude = ()
+
 
 @admin.register(DataSet)
 class DataSetAdmin(admin.ModelAdmin):

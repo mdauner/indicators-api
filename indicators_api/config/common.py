@@ -24,7 +24,6 @@ class Common(Configuration):
 
         # Your apps
         'indicators_api.indicator_data',
-        
     )
 
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
