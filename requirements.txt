@@ -10,9 +10,6 @@ psycopg2-binary==2.8.4
 dj-database-url==0.5.0
 django-admin-hstore-widget==1.1.0
 
-# Model Tools
-django-model-utils==4.0.0
-
 # Rest apis
 djangorestframework==3.11.0
 Markdown==3.1.1
@@ -31,6 +28,5 @@ pytest==5.4.1
 pytest-django==3.8.0
 
 # Static and Media Storage
-django-storages==1.8.0
-boto3==1.11.1
+whitenoise==5.0.1
 
