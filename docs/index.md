@@ -1,72 +1,44 @@
-# indicators_api
-
-[![Build Status](https://travis-ci.org/mdauner/indicators_api.svg?branch=master)](https://travis-ci.org/mdauner/indicators_api)
-[![Built with](https://img.shields.io/badge/Built_with-Cookiecutter_Django_Rest-F7B633.svg)](https://github.com/agconti/cookiecutter-django-rest)
-
-Its all about a Weissman score > 5.0. Check out the project's [documentation](http://mdauner.github.io/indicators_api/).
-
-# Prerequisites
-
-- [Docker](https://docs.docker.com/docker-for-mac/install/)  
-- [Travis CLI](http://blog.travis-ci.com/2013-01-14-new-client/)
-- [Heroku Toolbelt](https://toolbelt.heroku.com/)
-
-# Initialize the project
-
+# indicators-api
+ 
+## Prerequisites
+ 
+- [Docker](https://docs.docker.com/docker-for-mac/install/) 
+ 
+## Initialize the project
+ 
 Start the dev server for local development:
-
+ 
 ```bash
 docker-compose up
 ```
-
-Create a superuser to login to the admin:
-
+ 
+A [Visual Studio Code dev container](https://code.visualstudio.com/docs/remote/containers) configuration is also part of this project.
+ 
+## Import data
+ 
+This project can import data from the World Bank Indicators API.
+ 
+ 
+To fetch and import data run this command:
 ```bash
-docker-compose run --rm web ./manage.py createsuperuser
+docker-compose run --rm web python manage.py fetch_data
 ```
-
-
-# Continuous Deployment
-
-Deployment automated via Travis. When builds pass on the master or qa branch, Travis will deploy that branch to Heroku. Enable this by:
-
-Creating the production sever:
-
-```
-heroku create indicators_api-prod --remote prod && \
-    heroku addons:create newrelic:wayne --app indicators_api-prod && \
-    heroku addons:create heroku-postgresql:hobby-dev --app indicators_api-prod && \
-    heroku config:set DJANGO_SECRET=`openssl rand -base64 32` \
-        DJANGO_AWS_ACCESS_KEY_ID="Add your id" \
-        DJANGO_AWS_SECRET_ACCESS_KEY="Add your key" \
-        DJANGO_AWS_STORAGE_BUCKET_NAME="indicators_api-prod" \
-        --app indicators_api-prod
-```
-
-Creating the qa sever:
-
-```
-heroku create `indicators_api-qa --remote qa && \
-    heroku addons:create newrelic:wayne && \
-    heroku addons:create heroku-postgresql:hobby-dev && \
-    heroku config:set DJANGO_SECRET=`openssl rand -base64 32` \
-        DJANGO_AWS_ACCESS_KEY_ID="Add your id" \
-        DJANGO_AWS_SECRET_ACCESS_KEY="Add your key" \
-        DJANGO_AWS_STORAGE_BUCKET_NAME="indicators_api-qa" \
-```
-
-Securely add your heroku credentials to travis so it can automatically deploy your changes.
-
+ 
+This imports the following indicators for the most populous countries (USA, Mexico, India, Nigeria, China):
+ 
+Name              |Description       |
+------------------|------------------|
+SP.POP.TOTL       | Population, total
+NY.GDP.MKTP.CD    | GDP, total
+EN.ATM.CO2E.PC    | CO2 emissions
+SP.DYN.LE00.IN    | Life Expectancy at Birth
+TX.VAL.TECH.MF.ZS | High-technology exports (% of manufactured exports)
+IP.PAT.NRES       | Patent Application, non-residents
+IP.PAT.RESD       | Patent Application, residents
+ 
+ 
+## Tests
+ 
 ```bash
-travis encrypt HEROKU_AUTH_TOKEN="$(heroku auth:token)" --add
+docker-compose run --rm web pytest
 ```
-
-Commit your changes and push to master and qa to trigger your first deploys:
-
-```bash
-git commit -m "ci(travis): added heroku credentials" && \
-git push origin master && \
-git checkout -b qa && \
-git push -u origin qa
-```
-You're ready to continuously ship! ✨ 💅 🛳
