@@ -1,4 +1,6 @@
 # indicators-api
+
+[DEMO](https://indicators-api.herokuapp.com/api/v1/)
  
 ## Prerequisites
  
